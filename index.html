@@ -688,7 +688,7 @@
 
   <div class="quiz-nav">
     <button class="btn-back" id="btn-back" onclick="goBack()">← 戻る</button>
-    <button class="btn-next" id="btn-next" onclick="goNext()" disabled>次へ</button>
+    <div style="width:60px"></div>
   </div>
 </div>
 
@@ -819,25 +819,75 @@ const TIMELINE = [
   { week:'3ヶ月目〜', color:'#534AB7', bg:'#EEEDFE', text:'体質そのものへのアプローチが本格化。「変わった」と実感できる時期。' },
 ];
 
+const PRODUCTS = {
+  usagi: {
+    matsu: [
+      {name:'ファンケル ホワイトニング', price:2805, url:'https://amzn.to/4v3sZpm'},
+      {name:'DHC ビタミンC ハードカプセル', price:644, url:'https://amzn.to/4v81zyz'},
+      {name:'BIONUS 乳酸菌サプリ 30日分', price:1637, url:'https://amzn.to/41I8Bww'},
+    ],
+    take: [
+      {name:'ファンケル ホワイトニング', price:2805, url:'https://amzn.to/4v3sZpm'},
+      {name:'DHC ビタミンC ハードカプセル', price:644, url:'https://amzn.to/4v81zyz'},
+    ],
+    ume: [
+      {name:'DHC ビタミンC ハードカプセル', price:644, url:'https://amzn.to/4v81zyz'},
+    ],
+  },
+  kuma: {
+    matsu: [
+      {name:'アリナミンEXプラス', price:1877, url:'https://amzn.to/4toqSLh'},
+      {name:'キューピーコーワゴールドα', price:2592, url:'https://amzn.to/4tnZFbw'},
+      {name:'DHC ビタミンBミックス', price:730, url:'https://amzn.to/4s8Tc30'},
+    ],
+    take: [
+      {name:'アリナミンEXプラス', price:1877, url:'https://amzn.to/4v7HLva'},
+      {name:'ネイチャーメイド Bコンプレックス', price:727, url:'https://amzn.to/48aKoCF'},
+    ],
+    ume: [
+      {name:'キューピーコーワゴールドα', price:2592, url:'https://amzn.to/4tnZFbw'},
+    ],
+  },
+  neko: {
+    matsu: [
+      {name:'ディアナチュラ GABA', price:589, url:'https://amzn.to/3NEmngv'},
+      {name:'ファンケル 快眠サポート', price:2754, url:'https://amzn.to/4sdXDtn'},
+      {name:'ディアナチュラ 乳酸菌×ビフィズス菌×オリゴ糖', price:727, url:'https://amzn.to/415RhBx'},
+    ],
+    take: [
+      {name:'ディアナチュラ GABA', price:589, url:'https://amzn.to/3NEmngv'},
+      {name:'ファンケル 快眠サポート', price:2754, url:'https://amzn.to/4sdXDtn'},
+    ],
+    ume: [
+      {name:'ディアナチュラ GABA', price:589, url:'https://amzn.to/3NEmngv'},
+    ],
+  },
+  namake: {
+    matsu: [
+      {name:'ファンケル 内脂サポート', price:3888, url:'https://amzn.to/4v63Ji9'},
+      {name:'ヘム鉄 葉酸 亜鉛 マルチビタミン（Wellio）', price:1480, url:'https://amzn.to/4cjr20G'},
+      {name:'ディアナチュラ マグネシウム', price:1929, url:'https://amzn.to/3NFZsBv'},
+    ],
+    take: [
+      {name:'ファンケル 内脂サポート', price:3888, url:'https://amzn.to/4v63Ji9'},
+      {name:'ヘム鉄 葉酸 亜鉛 マルチビタミン（Wellio）', price:1480, url:'https://amzn.to/4cjr20G'},
+    ],
+    ume: [
+      {name:'ファンケル 内脂サポート', price:3888, url:'https://amzn.to/4v63Ji9'},
+    ],
+  },
+};
+
 const PLANS = [
-  { id:'matsu', name:'フルケアプラン', role:'本気で変えたい・2ヶ月分', badge:'特別セット', badgeColor:'#854F0B',
-    color:'#854F0B', bg:'#FAEEDA',
-    teiki:6980, tanpin:8400, orig:8400, save:'17%OFF',
-    period:'定期・60日分', periodSingle:'単品・60日分',
-    items:['サプリ 2本（60日分）','美容ドリンク 1本付き','専用ガイドブック','送料無料'],
-    voice:'2ヶ月セットにして正解。途中でやめなかったから変化が出た気がします。', voiceBy:'34歳・会社員' },
-  { id:'take', name:'ベーシックプラン', role:'まず1ヶ月・続けやすい価格', badge:'いちばん人気', badgeColor:'#D4537E',
-    color:'#D4537E', bg:'#FBEAF0',
-    teiki:2480, tanpin:2980, orig:2980, save:'17%OFF',
-    period:'定期・30日分', periodSingle:'単品・30日分',
-    items:['サプリ 1本（30日分）','専用ガイドブック付き','送料無料'],
-    voice:'定期にしたら飲み忘れなくなって、1ヶ月後に変化を感じました。', voiceBy:'28歳・フリーランス' },
-  { id:'ume', name:'お試しプラン', role:'まずどんなものか試したい', badge:null, badgeColor:null,
-    color:'#5F5E5A', bg:'#F1EFE8',
-    teiki:null, tanpin:2980, orig:null, save:null,
-    period:'単品・30日分', periodSingle:'単品・30日分',
-    items:['サプリ 1本（30日分）','送料無料'],
-    voice:'1本試して良かったので定期に切り替えました。まず試せるのが良かった。', voiceBy:'31歳・主婦' },
+  {id:'matsu', name:'フルケアプラン', role:'本気で変えたい・セット買い', badge:'特別セット', badgeColor:'#854F0B',
+   color:'#854F0B', bg:'#FAEEDA',
+   voice:'セットにして正解。途中でやめなかったから変化が出ました。', voiceBy:'34歳・会社員'},
+  {id:'take', name:'ベーシックプラン', role:'まず1つから・続けやすい', badge:'いちばん人気', badgeColor:'#D4537E',
+   color:'#D4537E', bg:'#FBEAF0',
+   voice:'1本から試して、変化を感じてから続けています。', voiceBy:'28歳・フリーランス'},
+  {id:'ume', name:'お試しプラン', role:'まず1品だけ試したい', badge:null, badgeColor:null,
+   color:'#5F5E5A', bg:'#F1EFE8',
+   voice:'まず試せるのが良かった。今は全部使っています。', voiceBy:'31歳・主婦'},
 ];
 
 // ===== STATE =====
@@ -869,8 +919,7 @@ function renderQuiz() {
   const rem = Math.max(1, Math.ceil((15 - cur) * 3 / 60));
   document.getElementById('quiz-time').textContent = cur < 14 ? `残り約${rem}分` : '最後の質問';
   document.getElementById('btn-back').style.visibility = cur === 0 ? 'hidden' : 'visible';
-  document.getElementById('btn-next').style.background = q.secColor;
-  document.getElementById('btn-next').disabled = answers[cur] === null;
+
   document.getElementById('quiz-q').textContent = q.q;
   const wrap = document.getElementById('choices');
   wrap.innerHTML = '';
@@ -884,7 +933,7 @@ function renderQuiz() {
       document.querySelectorAll('.choice-btn').forEach(b => { b.classList.remove('selected'); b.style.borderColor=''; b.style.background=''; b.style.color=''; });
       btn.classList.add('selected');
       btn.style.cssText = `border-color:${q.secColor};background:${q.secBg};color:${q.secColor};border-width:2px`;
-      document.getElementById('btn-next').disabled = false;
+      setTimeout(() => goNext(), 300);
     };
     wrap.appendChild(btn);
   });
@@ -955,12 +1004,20 @@ function showProductPage() {
 
 function renderProduct() {
   const t = TYPES[currentType];
-  document.getElementById('product-header-title').textContent = 'プランを選ぶ';
+  const prods = PRODUCTS[currentType] || {};
+  document.getElementById('product-header-title').textContent = 'おすすめサプリ';
   document.getElementById('product-header-title').style.color = t.color;
 
   const visiblePlans = planTab === 'teiki'
     ? PLANS.filter(p => p.id !== 'ume')
     : PLANS;
+
+  function planItems(planId) {
+    return (prods[planId] || []);
+  }
+  function planTotal(planId) {
+    return planItems(planId).reduce((s, p) => s + p.price, 0);
+  }
 
   const body = document.getElementById('product-body');
   body.innerHTML = `
@@ -968,23 +1025,23 @@ function renderProduct() {
       <div class="product-type-icon">${t.emoji}</div>
       <div>
         <div class="product-type-text">${t.name} におすすめ</div>
-        <div class="product-type-sub">内側からケアするサプリ</div>
+        <div class="product-type-sub">Amazonで購入できます</div>
       </div>
     </div>
 
     <div style="background:#fff;border-radius:10px;padding:14px 16px;border:1px solid #eee">
       <div style="font-size:13px;font-weight:700;color:${t.color};margin-bottom:6px">体の内側を整えるには、最低でも2〜3ヶ月かかります。</div>
-      <div style="font-size:13px;color:#555;line-height:1.65">1週間では変わりません。だから「続けやすさ」が一番大事です。</div>
+      <div style="font-size:13px;color:#555;line-height:1.65">1週間では変わりません。まずは1つから始めて、続けることが大切です。</div>
     </div>
 
     <div class="tab-row">
-      <button class="tab-btn${planTab==='teiki'?' on':''}" id="tab-teiki" style="${planTab==='teiki'?'background:'+t.color:''}">定期購入（お得）</button>
-      <button class="tab-btn${planTab==='tanpin'?' on':''}" id="tab-tanpin" style="${planTab==='tanpin'?'background:'+t.color:''}">単品購入</button>
+      <button class="tab-btn${planTab==='teiki'?' on':''}" id="tab-teiki" style="${planTab==='teiki'?'background:'+t.color:''}">セットで購入</button>
+      <button class="tab-btn${planTab==='tanpin'?' on':''}" id="tab-tanpin" style="${planTab==='tanpin'?'background:'+t.color:''}">1品から試す</button>
     </div>
-    <div class="tab-note">${planTab==='teiki'?'続けやすい価格で毎月自動お届け・いつでも解約可':'1本から試せます。続けるなら定期がお得です。'}</div>
 
     ${visiblePlans.map(p => {
-      const pr = planTab==='teiki' ? p.teiki : p.tanpin;
+      const items = planItems(p.id);
+      const total = planTotal(p.id);
       const isSel = selectedPlan === p.id;
       return `
       <div class="plan-card${isSel?' selected':''}" id="pc-${p.id}"
@@ -1000,43 +1057,65 @@ function renderProduct() {
           </div>
         </div>
         <div class="plan-price-row">
-          <div class="plan-price" style="color:${p.color}">¥${pr.toLocaleString()}</div>
-          <div class="plan-unit">${planTab==='teiki'?'円 / 月':'円'}</div>
-          ${planTab==='teiki'&&p.orig?`<div class="plan-orig">¥${p.orig.toLocaleString()}</div>`:''}
-          ${planTab==='teiki'&&p.save?`<div class="plan-save" style="background:${p.bg};color:${p.color}">${p.save}</div>`:''}
+          <div class="plan-price" style="color:${p.color}">¥${total.toLocaleString()}</div>
+          <div class="plan-unit">円〜（合計）</div>
         </div>
-        <div class="plan-period">${planTab==='teiki'?p.period:p.periodSingle}</div>
-        <div class="plan-items">${p.items.map(it=>`<div class="plan-item"><div class="item-dot" style="background:${p.color}"></div>${it}</div>`).join('')}</div>
+        <div class="plan-items">
+          ${items.map(it=>`
+            <div class="plan-item">
+              <div class="item-dot" style="background:${p.color}"></div>
+              <a href="${it.url}" target="_blank" rel="noopener" style="color:${isSel?p.color:'#1a1a1a'};text-decoration:none;font-size:13px">
+                ${it.name} <span style="color:#888;font-size:11px">¥${it.price.toLocaleString()}</span>
+              </a>
+            </div>`).join('')}
+        </div>
         ${isSel?`<div class="voice-box"><div class="voice-txt">「${p.voice}」</div><div class="voice-by">${p.voiceBy}</div></div>`:''}
       </div>`;
     }).join('')}
 
     <div class="guarantee-row">
-      <div class="g-item">🔒 SSL暗号化</div>
-      <div class="g-item">↩ 30日返金保証</div>
-      <div class="g-item">✓ いつでも解約</div>
+      <div class="g-item">✓ Amazon公式</div>
+      <div class="g-item">✓ 翌日配送対応</div>
+      <div class="g-item">✓ 返品保証あり</div>
     </div>
   `;
 
-  // bind tab events
   document.getElementById('tab-teiki').onclick = () => { planTab='teiki'; if(selectedPlan==='ume') selectedPlan='take'; renderProduct(); };
-  document.getElementById('tab-tanpin').onclick = () => { planTab='tanpin'; renderProduct(); };
+  document.getElementById('tab-tanpin').onclick = () => { planTab='tanpin'; selectedPlan='ume'; renderProduct(); };
   PLANS.forEach(p => {
     const el = document.getElementById('pc-'+p.id);
     if (el) el.onclick = () => { selectedPlan = p.id; renderProduct(); };
   });
 
-  // footer
   const sp = PLANS.find(p => p.id === selectedPlan);
+  const items = planItems(selectedPlan);
   const footer = document.getElementById('product-footer');
-  footer.innerHTML = `
-    <button class="btn-buy" style="background:${sp.color}" onclick="alert('購入フローへ（Stripe連携後に実装）')">
-      ${planTab==='teiki'?'定期購入で始める →':'この内容で購入する →'}
-    </button>
-    <button class="btn-sub-link" onclick="${planTab==='teiki'?`planTab='tanpin';selectedPlan='ume';renderProduct()`:`planTab='teiki';selectedPlan='take';renderProduct()`}">
-      ${planTab==='teiki'?'単品でまず試す':'定期購入の方がお得です →'}
-    </button>
-  `;
+
+  if (items.length === 1) {
+    footer.innerHTML = `
+      <a href="${items[0].url}" target="_blank" rel="noopener" style="display:block;text-decoration:none">
+        <button class="btn-buy" style="background:${sp.color};width:100%">Amazonで購入する →</button>
+      </a>
+      <button class="btn-sub-link" onclick="planTab='teiki';selectedPlan='take';renderProduct()">セットで購入する方がお得です →</button>
+    `;
+  } else {
+    footer.innerHTML = `
+      <div style="font-size:13px;font-weight:700;color:${sp.color};margin-bottom:12px;text-align:center">商品ごとにAmazonで購入できます</div>
+      ${items.map((it, idx) => `
+        <a href="${it.url}" target="_blank" rel="noopener" style="display:block;text-decoration:none;margin-bottom:10px">
+          <div style="width:100%;background:#fff;border:2px solid ${sp.color};border-radius:14px;padding:14px 16px;cursor:pointer;box-sizing:border-box">
+            <div style="font-size:11px;color:#aaa;margin-bottom:4px">商品 ${idx+1}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+              <div style="font-size:13px;font-weight:700;color:${sp.color};line-height:1.4;flex:1">${it.name.length > 22 ? it.name.slice(0,22)+'...' : it.name}</div>
+              <div style="font-size:14px;font-weight:700;color:${sp.color};white-space:nowrap">¥${it.price.toLocaleString()} →</div>
+            </div>
+          </div>
+        </a>`).join('')}
+      <button class="btn-sub-link" onclick="${planTab==='teiki'?`planTab='tanpin';selectedPlan='ume';renderProduct()`:`planTab='teiki';selectedPlan='take';renderProduct()`}">
+        ${planTab==='teiki'?'1品だけ試す':'セットで購入する →'}
+      </button>
+    `;
+  }
 }
 </script>
 </body>
