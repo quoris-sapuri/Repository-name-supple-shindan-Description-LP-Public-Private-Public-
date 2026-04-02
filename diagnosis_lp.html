@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたの肌タイプ診断 | サプリ診断</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #D4537E;
+    --pink-light: #FBEAF0;
+    --pink-mid: #F4C0D1;
+    --amber: #854F0B;
+    --amber-light: #FAEEDA;
+    --teal: #0F6E56;
+    --teal-light: #E1F5EE;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --gray: #5F5E5A;
+    --gray-light: #F5F4F0;
+    --text: #1a1a1a;
+    --text-mid: #555;
+    --text-light: #999;
+    --white: #fff;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #faf9f7;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ===== TOP LP ===== */
+  #page-top {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .top-hero {
+    background: #FFFBF0;
+    padding: 40px 22px 32px;
+    text-align: center;
+  }
+  .hero-label {
+    display: inline-block;
+    background: #FFD166;
+    color: #7A5200;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .hero-title span { color: #FF6B6B; }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 0;
+  }
+
+  .top-content {
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+  .worry-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .worry-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .worry-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #FF6B6B;
+    flex-shrink: 0;
+  }
+  .types-preview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .type-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: var(--radius-sm);
+    padding: 10px 6px;
+    text-align: center;
+  }
+  .type-card-emoji { font-size: 22px; margin-bottom: 4px; }
+  .type-card-name { font-size: 11px; font-weight: 700; color: var(--text); }
+  .type-card-sub { font-size: 10px; color: var(--text-light); margin-top: 2px; }
+
+  .top-cta {
+    padding: 0 20px 40px;
+  }
+  .btn-start {
+    width: 100%;
+    background: #FF6B6B;
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: .04em;
+    transition: opacity .15s, transform .1s;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .btn-start:hover { opacity: .9; }
+  .btn-start:active { transform: scale(.98); }
+  .start-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 8px;
+  }
+
+  /* ===== QUIZ ===== */
+  #page-quiz {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .quiz-header {
+    padding: 14px 20px 10px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+  }
+  .quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .quiz-step { font-size: 12px; color: var(--text-light); }
+  .quiz-section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .quiz-time { font-size: 12px; color: var(--text-light); }
+  .progress-track {
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width .4s ease;
+  }
+
+  .quiz-body {
+    flex: 1;
+    padding: 28px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+  }
+  .quiz-q {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .choice-btn {
+    width: 100%;
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 15px;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    transition: all .12s;
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.5;
+  }
+  .choice-btn:hover { border-color: var(--pink); background: var(--pink-light); }
+  .choice-btn.selected { border-color: var(--pink); background: var(--pink-light); color: #72243E; font-weight: 500; border-width: 2px; }
+
+  .quiz-nav {
+    padding: 12px 20px 28px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .btn-back {
+    font-size: 14px;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 8px 0;
+    background: none;
+    border: none;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .btn-next {
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .15s;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .btn-next:disabled { opacity: .3; cursor: not-allowed; }
+
+  /* ===== RESULT ===== */
+  #page-result {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .result-hero {
+    padding: 40px 24px 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .result-animal {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    border: 3px solid transparent;
+    animation: popIn .5s ease;
+  }
+  @keyframes popIn {
+    0% { transform: scale(.5); opacity: 0; }
+    70% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .result-type-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .result-type-pill {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 20px;
+  }
+  .result-empathy {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.85;
+    text-align: center;
+    white-space: pre-line;
+  }
+  .result-trust {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 16px 24px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  .trust-item { text-align: center; }
+  .trust-num { font-size: 20px; font-weight: 700; color: var(--text); }
+  .trust-lbl { font-size: 11px; color: var(--text-light); }
+
+  .result-cause {
+    margin: 20px;
+    background: var(--gray-light);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .result-cause-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+  .result-cause-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .result-timeline {
+    margin: 0 20px 20px;
+  }
+  .timeline-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-mid);
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .tl-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .tl-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .tl-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .tl-line {
+    width: 1.5px;
+    flex: 1;
+    min-height: 14px;
+    background: #e0e0e0;
+    margin-top: 3px;
+  }
+  .tl-week { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+  .tl-text { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+  .result-cta {
+    padding: 16px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-product {
+    width: 100%;
+    border: none;
+    border-radius: var(--radius);
+    padding: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: opacity .15s;
+  }
+  .btn-product:hover { opacity: .9; }
+  .result-social {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  /* ===== PRODUCT PAGE ===== */
+  #page-product {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .product-header {
+    padding: 14px 20px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .back-btn {
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .product-header-title { font-size: 14px; font-weight: 700; }
+  .product-body {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+  }
+  .product-type-banner {
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--pink-light);
+  }
+  .product-type-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .product-type-text { font-size: 13px; font-weight: 700; color: #72243E; }
+  .product-type-sub { font-size: 12px; color: #993556; }
+
+  .tab-row {
+    display: flex;
+    border: 1.5px solid #e0e0e0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    border: none;
+    color: var(--text-light);
+    transition: all .15s;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .tab-btn.on { background: var(--pink); color: #fff; font-weight: 700; }
+
+  .tab-note { font-size: 11px; color: var(--text-light); text-align: center; }
+
+  .plan-card {
+    border: 1.5px solid #e0e0e0;
+    border-radius: var(--radius);
+    padding: 16px;
+    cursor: pointer;
+    transition: all .15s;
+    position: relative;
+    background: #fff;
+    margin-top: 10px;
+  }
+  .plan-card.featured { border-color: var(--pink); background: var(--pink-light); }
+  .plan-card.selected { border-width: 2px; }
+  .plan-badge {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 20px;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .plan-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .plan-name { font-size: 15px; font-weight: 700; }
+  .plan-role { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+  .radio-circle {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .radio-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .plan-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+  .plan-price { font-size: 24px; font-weight: 700; }
+  .plan-unit { font-size: 12px; color: var(--text-light); }
+  .plan-orig { font-size: 12px; color: var(--text-light); text-decoration: line-through; }
+  .plan-save {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .plan-period { font-size: 11px; color: var(--text-light); margin-bottom: 10px; }
+  .plan-items { display: flex; flex-direction: column; gap: 5px; }
+  .plan-item {
+    font-size: 13px;
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .item-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .voice-box {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,.7);
+    border-radius: var(--radius-sm);
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+  .voice-txt { font-size: 12px; color: var(--text-mid); line-height: 1.6; font-style: italic; }
+  .voice-by { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+
+  .guarantee-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 8px 0;
+  }
+  .g-item { font-size: 11px; color: var(--text-light); display: flex; align-items: center; gap: 4px; }
+
+  .product-footer {
+    padding: 12px 20px 32px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    flex-shrink: 0;
+  }
+  .btn-buy {
+    width: 100%;
+    border: none;
+    border-radius: var(--radius);
+    padding: 17px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: opacity .15s;
+  }
+  .btn-buy:hover { opacity: .9; }
+  .btn-sub-link {
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    margin-top: 10px;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-align: center;
+  }
+
+  /* Utilities */
+  .hidden { display: none !important; }
+  .fade-in { animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP LP ===== -->
+<div id="page-top">
+  <div class="top-hero">
+    <div class="hero-label">✨ 無料 · 2分でわかる</div>
+    <h1 class="hero-title">サプリ選びに<br>困っている<br><span>あなたへ。</span></h1>
+    <p class="hero-sub">今の自分、<span style="font-weight:700;color:#FF6B6B">何タイプ</span>か知ってる？<br>疲れ・肌・気分・体型…<br>ぜんぶつながってる理由、教えます。</p>
+  </div>
+
+  <div class="top-content">
+    <div>
+      <div class="section-label">診断で分かる4タイプ</div>
+      <div class="types-preview">
+        <div class="type-card">
+          <div class="type-card-emoji">🐰</div>
+          <div class="type-card-name">ウサギ</div>
+          <div class="type-card-sub">がんばりすぎ</div>
+        </div>
+        <div class="type-card">
+          <div class="type-card-emoji">🐻</div>
+          <div class="type-card-name">クマ</div>
+          <div class="type-card-sub">つかれすぎ</div>
+        </div>
+        <div class="type-card">
+          <div class="type-card-emoji">🐱</div>
+          <div class="type-card-name">ネコ</div>
+          <div class="type-card-sub">ゆらぎすぎ</div>
+        </div>
+        <div class="type-card">
+          <div class="type-card-emoji">🦥</div>
+          <div class="type-card-name">ナマケモノ</div>
+          <div class="type-card-sub">たまりすぎ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worry-section">
+      <div class="section-label">こんな悩み、ありませんか？</div>
+      <div class="worry-list">
+        <div class="worry-item"><div class="worry-dot"></div>ちゃんとケアしてるのに変わらない</div>
+        <div class="worry-item"><div class="worry-dot"></div>寝ても疲れが取れない・朝から重だるい</div>
+        <div class="worry-item"><div class="worry-dot"></div>気分の波が激しくてイライラしやすい</div>
+        <div class="worry-item"><div class="worry-dot"></div>食べていないのに体型が変わらない</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="top-cta">
+    <button class="btn-start" onclick="startQuiz()">診断してみる →</button>
+    <div class="start-note">登録不要・完全無料・所要時間約2分</div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="page-quiz" class="hidden">
+  <div class="quiz-header">
+    <div class="quiz-meta">
+      <span class="quiz-step" id="quiz-step">Q1 / 15</span>
+      <span class="quiz-section-tag" id="quiz-section-tag"></span>
+      <span class="quiz-time" id="quiz-time">残り約2分</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:6.7%"></div>
+    </div>
+  </div>
+
+  <div class="quiz-body">
+    <div class="quiz-q" id="quiz-q"></div>
+    <div class="choices" id="choices"></div>
+  </div>
+
+  <div class="quiz-nav">
+    <button class="btn-back" id="btn-back" onclick="goBack()">← 戻る</button>
+    <div style="width:60px"></div>
+  </div>
+</div>
+
+<!-- ===== RESULT ===== -->
+<div id="page-result" class="hidden">
+  <div class="result-hero" id="result-hero"></div>
+  <div class="result-trust">
+    <div class="trust-item"><div class="trust-num" id="trust-count">3,200</div><div class="trust-lbl">同じタイプ</div></div>
+    <div class="trust-item"><div class="trust-num">87%</div><div class="trust-lbl">継続率</div></div>
+    <div class="trust-item"><div class="trust-num">4.8</div><div class="trust-lbl">★ 評価</div></div>
+  </div>
+  <div class="result-cause" id="result-cause"></div>
+  <div class="result-timeline" id="result-timeline"></div>
+  <div class="result-cta" id="result-cta"></div>
+</div>
+
+<!-- ===== PRODUCT ===== -->
+<div id="page-product" class="hidden">
+  <div class="product-header">
+    <button class="back-btn" onclick="showPage('result')">← 診断結果</button>
+    <div class="product-header-title" id="product-header-title">プランを選ぶ</div>
+    <div style="width:60px"></div>
+  </div>
+  <div class="product-body" id="product-body"></div>
+  <div class="product-footer" id="product-footer"></div>
+</div>
+
+<script>
+// ===== DATA =====
+const QUESTIONS = [
+  { sec:'悩み把握', secColor:'#D4537E', secBg:'#FBEAF0',
+    q:'今いちばん気になるのは？',
+    cs:['肌のこと','疲れやだるさ','気分やメンタル','体型・むくみ'],
+    sc:{usagi:2,kuma:1,neko:1,namake:1} },
+  { sec:'悩み把握', secColor:'#D4537E', secBg:'#FBEAF0',
+    q:'最近感じる不調は？',
+    cs:['肌荒れ・ゆらぎ','だるい・重い','イライラ・不安','むくみ・冷え'],
+    sc:{usagi:2,kuma:1,neko:1,namake:1} },
+  { sec:'悩み把握', secColor:'#D4537E', secBg:'#FBEAF0',
+    q:'周りから言われることは？',
+    cs:['疲れてる顔してる','元気なさそう','最近太った？','神経質そう'],
+    sc:{kuma:1,kuma:1,namake:2,neko:1} },
+  { sec:'悩み把握', secColor:'#D4537E', secBg:'#FBEAF0',
+    q:'自分でいちばん感じるのは？',
+    cs:['回復しない体','将来への不安','体型の変化','肌のくすみ'],
+    sc:{kuma:2,neko:1,namake:2,usagi:2} },
+  { sec:'悩み把握', secColor:'#D4537E', secBg:'#FBEAF0',
+    q:'一番改善したいのは？',
+    cs:['肌・見た目','元気・体力','心の安定','体型・代謝'],
+    sc:{usagi:2,kuma:2,neko:2,namake:2} },
+  { sec:'体質チェック', secColor:'#185FA5', secBg:'#E6F1FB',
+    q:'朝起きたときの状態は？',
+    cs:['スッキリ起きれる','体が重い','とにかく眠い','起きるのがつらい'],
+    sc:{usagi:0,kuma:2,neko:1,namake:1} },
+  { sec:'体質チェック', secColor:'#185FA5', secBg:'#E6F1FB',
+    q:'疲れ方のパターンは？',
+    cs:['寝ても回復しない','夕方に急に落ちる','常にだるい感じ','特に気にならない'],
+    sc:{kuma:2,namake:1,kuma:2,usagi:0} },
+  { sec:'体質チェック', secColor:'#185FA5', secBg:'#E6F1FB',
+    q:'食生活はどんな感じ？',
+    cs:['バラバラ・不規則','外食・コンビニ多め','偏食気味','比較的バランスよく'],
+    sc:{usagi:1,namake:1,neko:1,usagi:0} },
+  { sec:'体質チェック', secColor:'#185FA5', secBg:'#E6F1FB',
+    q:'肌の状態は？',
+    cs:['脂っぽい・テカる','乾燥・カサつく','ゆらぎやすい','普通・気にならない'],
+    sc:{usagi:1,usagi:2,usagi:2,usagi:0} },
+  { sec:'体質チェック', secColor:'#185FA5', secBg:'#E6F1FB',
+    q:'体質に近いのは？',
+    cs:['冷えやすい','むくみやすい','太りやすい','特に気にならない'],
+    sc:{namake:2,namake:2,namake:2,usagi:0} },
+  { sec:'生活習慣', secColor:'#3B6D11', secBg:'#EAF3DE',
+    q:'睡眠はどんな状態？',
+    cs:['短い（5時間未満）','普通（6〜7時間）','不規則・バラバラ','深く眠れていない'],
+    sc:{kuma:2,usagi:0,kuma:1,kuma:2} },
+  { sec:'生活習慣', secColor:'#3B6D11', secBg:'#EAF3DE',
+    q:'ストレスを感じる頻度は？',
+    cs:['かなり多い','まあまあある','あまりない','常にある感じ'],
+    sc:{neko:2,neko:1,usagi:0,neko:2} },
+  { sec:'生活習慣', secColor:'#3B6D11', secBg:'#EAF3DE',
+    q:'運動習慣は？',
+    cs:['ほとんどしない','たまにする','定期的にしている','ほぼ毎日'],
+    sc:{namake:2,namake:1,usagi:0,usagi:0} },
+  { sec:'生活習慣', secColor:'#3B6D11', secBg:'#EAF3DE',
+    q:'1日の水分摂取は？',
+    cs:['少ない（ほぼ飲まない）','普通くらい','多めに飲んでる','意識していない'],
+    sc:{namake:1,usagi:0,usagi:0,namake:1} },
+  { sec:'生活習慣', secColor:'#3B6D11', secBg:'#EAF3De',
+    q:'日光を浴びる機会は？',
+    cs:['ほとんどない','少し浴びる','普通くらい','ほぼ浴びない'],
+    sc:{kuma:1,usagi:0,usagi:0,kuma:1} },
+];
+
+const TYPES = {
+  usagi: {
+    name:'がんばりすぎウサギ', emoji:'🐰', color:'#D4537E', bg:'#FBEAF0', textColor:'#72243E',
+    pill:'内側炎症タイプ',
+    empathy:'「ちゃんとケアしてるのになぜか肌が荒れる」\nそれ、外側じゃなくて内側のサインかもしれません。',
+    cause:'肌の炎症は体内の栄養バランスの乱れが原因のことが多いです。スキンケアだけでは届かない「内側からのケア」が必要な状態です。',
+    trust:'3,200',
+  },
+  kuma: {
+    name:'つかれすぎクマ', emoji:'🐻', color:'#854F0B', bg:'#FAEEDA', textColor:'#412402',
+    pill:'慢性疲労タイプ',
+    empathy:'「寝ても疲れが取れない」「朝からだるい」\nその体、ずっとフル稼働してきたんです。',
+    cause:'慢性的な疲労は細胞レベルのエネルギー不足が原因です。睡眠や休息だけでは補えない栄養素が枯渇しています。',
+    trust:'2,800',
+  },
+  neko: {
+    name:'ゆらぎすぎネコ', emoji:'🐱', color:'#534AB7', bg:'#EEEDFE', textColor:'#26215C',
+    pill:'ストレス過多タイプ',
+    empathy:'「何となく不安」「気分の波が激しい」\nそれ、心が弱いんじゃなくてホルモンのサインです。',
+    cause:'ストレスホルモンが慢性的に高い状態が続いています。腸内環境とメンタルは密接につながっており、内側からのアプローチが効果的です。',
+    trust:'4,100',
+  },
+  namake: {
+    name:'たまりすぎナマケモノ', emoji:'🦥', color:'#0F6E56', bg:'#E1F5EE', textColor:'#04342C',
+    pill:'代謝低下タイプ',
+    empathy:'「食べてないのに太る」「むくみが取れない」\n代謝が落ちているだけ、あなたのせいじゃない。',
+    cause:'基礎代謝の低下と体内の巡りの悪さが根本原因です。冷えやむくみは体が「助けて」と言っているサインです。',
+    trust:'2,400',
+  },
+};
+
+const TIMELINE = [
+  { week:'1〜2週目', color:'#D4537E', bg:'#FBEAF0', text:'腸内環境が少しずつ整い始めます。まだ見た目の変化は感じにくい時期。' },
+  { week:'3〜4週目', color:'#854F0B', bg:'#FAEEDA', text:'肌のキメが少し落ち着いてきたと感じる方が多い時期です。' },
+  { week:'2ヶ月目',  color:'#0F6E56', bg:'#E1F5EE', text:'内側から整ってくる実感が出てくる方が増えます。ここが継続の分かれ目。' },
+  { week:'3ヶ月目〜', color:'#534AB7', bg:'#EEEDFE', text:'体質そのものへのアプローチが本格化。「変わった」と実感できる時期。' },
+];
+
+const PRODUCTS = {
+  usagi: {
+    matsu: [
+      {name:'ファンケル ホワイトニング', price:2805, url:'https://amzn.to/4v3sZpm'},
+      {name:'DHC ビタミンC ハードカプセル', price:644, url:'https://amzn.to/4v81zyz'},
+      {name:'BIONUS 乳酸菌サプリ 30日分', price:1637, url:'https://amzn.to/41I8Bww'},
+    ],
+    take: [
+      {name:'ファンケル ホワイトニング', price:2805, url:'https://amzn.to/4v3sZpm'},
+      {name:'DHC ビタミンC ハードカプセル', price:644, url:'https://amzn.to/4v81zyz'},
+    ],
+    ume: [
+      {name:'DHC ビタミンC ハードカプセル', price:644, url:'https://amzn.to/4v81zyz'},
+    ],
+  },
+  kuma: {
+    matsu: [
+      {name:'アリナミンEXプラス', price:1877, url:'https://amzn.to/4toqSLh'},
+      {name:'キューピーコーワゴールドα', price:2592, url:'https://amzn.to/4tnZFbw'},
+      {name:'DHC ビタミンBミックス', price:730, url:'https://amzn.to/4s8Tc30'},
+    ],
+    take: [
+      {name:'アリナミンEXプラス', price:1877, url:'https://amzn.to/4v7HLva'},
+      {name:'ネイチャーメイド Bコンプレックス', price:727, url:'https://amzn.to/48aKoCF'},
+    ],
+    ume: [
+      {name:'キューピーコーワゴールドα', price:2592, url:'https://amzn.to/4tnZFbw'},
+    ],
+  },
+  neko: {
+    matsu: [
+      {name:'ディアナチュラ GABA', price:589, url:'https://amzn.to/3NEmngv'},
+      {name:'ファンケル 快眠サポート', price:2754, url:'https://amzn.to/4sdXDtn'},
+      {name:'ディアナチュラ 乳酸菌×ビフィズス菌×オリゴ糖', price:727, url:'https://amzn.to/415RhBx'},
+    ],
+    take: [
+      {name:'ディアナチュラ GABA', price:589, url:'https://amzn.to/3NEmngv'},
+      {name:'ファンケル 快眠サポート', price:2754, url:'https://amzn.to/4sdXDtn'},
+    ],
+    ume: [
+      {name:'ディアナチュラ GABA', price:589, url:'https://amzn.to/3NEmngv'},
+    ],
+  },
+  namake: {
+    matsu: [
+      {name:'ファンケル 内脂サポート', price:3888, url:'https://amzn.to/4v63Ji9'},
+      {name:'ヘム鉄 葉酸 亜鉛 マルチビタミン（Wellio）', price:1480, url:'https://amzn.to/4cjr20G'},
+      {name:'ディアナチュラ マグネシウム', price:1929, url:'https://amzn.to/3NFZsBv'},
+    ],
+    take: [
+      {name:'ファンケル 内脂サポート', price:3888, url:'https://amzn.to/4v63Ji9'},
+      {name:'ヘム鉄 葉酸 亜鉛 マルチビタミン（Wellio）', price:1480, url:'https://amzn.to/4cjr20G'},
+    ],
+    ume: [
+      {name:'ファンケル 内脂サポート', price:3888, url:'https://amzn.to/4v63Ji9'},
+    ],
+  },
+};
+
+const PLANS = [
+  {id:'matsu', name:'フルケアプラン', role:'本気で変えたい・セット買い', badge:'特別セット', badgeColor:'#854F0B',
+   color:'#854F0B', bg:'#FAEEDA',
+   voice:'セットにして正解。途中でやめなかったから変化が出ました。', voiceBy:'34歳・会社員'},
+  {id:'take', name:'ベーシックプラン', role:'まず1つから・続けやすい', badge:'いちばん人気', badgeColor:'#D4537E',
+   color:'#D4537E', bg:'#FBEAF0',
+   voice:'1本から試して、変化を感じてから続けています。', voiceBy:'28歳・フリーランス'},
+  {id:'ume', name:'お試しプラン', role:'まず1品だけ試したい', badge:null, badgeColor:null,
+   color:'#5F5E5A', bg:'#F1EFE8',
+   voice:'まず試せるのが良かった。今は全部使っています。', voiceBy:'31歳・主婦'},
+];
+
+// ===== STATE =====
+let cur = 0;
+let answers = Array(15).fill(null);
+let currentType = null;
+let planTab = 'teiki';
+let selectedPlan = 'take';
+
+// ===== PAGES =====
+function showPage(id) {
+  ['page-top','page-quiz','page-result','page-product'].forEach(p => {
+    document.getElementById(p).classList.toggle('hidden', p !== 'page-' + id);
+  });
+  window.scrollTo(0,0);
+}
+
+// ===== QUIZ =====
+function startQuiz() { cur = 0; answers = Array(15).fill(null); renderQuiz(); showPage('quiz'); }
+
+function renderQuiz() {
+  const q = QUESTIONS[cur];
+  document.getElementById('quiz-step').textContent = `Q${cur+1} / 15`;
+  document.getElementById('progress-fill').style.width = ((cur+1)/15*100).toFixed(1) + '%';
+  document.getElementById('progress-fill').style.background = q.secColor;
+  const tag = document.getElementById('quiz-section-tag');
+  tag.textContent = q.sec;
+  tag.style.cssText = `background:${q.secBg};color:${q.secColor};font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px`;
+  const rem = Math.max(1, Math.ceil((15 - cur) * 3 / 60));
+  document.getElementById('quiz-time').textContent = cur < 14 ? `残り約${rem}分` : '最後の質問';
+  document.getElementById('btn-back').style.visibility = cur === 0 ? 'hidden' : 'visible';
+
+  document.getElementById('quiz-q').textContent = q.q;
+  const wrap = document.getElementById('choices');
+  wrap.innerHTML = '';
+  q.cs.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn' + (answers[cur] === i ? ' selected' : '');
+    btn.textContent = c;
+    if (answers[cur] === i) { btn.style.borderColor = q.secColor; btn.style.background = q.secBg; btn.style.color = q.secColor; }
+    btn.onclick = () => {
+      answers[cur] = i;
+      document.querySelectorAll('.choice-btn').forEach(b => { b.classList.remove('selected'); b.style.borderColor=''; b.style.background=''; b.style.color=''; });
+      btn.classList.add('selected');
+      btn.style.cssText = `border-color:${q.secColor};background:${q.secBg};color:${q.secColor};border-width:2px`;
+      setTimeout(() => goNext(), 300);
+    };
+    wrap.appendChild(btn);
+  });
+}
+
+function goNext() { if (answers[cur] === null) return; cur++; if (cur >= 15) { calcResult(); } else { renderQuiz(); } }
+function goBack() { if (cur === 0) return; cur--; renderQuiz(); }
+
+// ===== RESULT =====
+function calcResult() {
+  const scores = { usagi:0, kuma:0, neko:0, namake:0 };
+  QUESTIONS.forEach((q, qi) => {
+    if (answers[qi] === null) return;
+    const keys = Object.keys(q.sc);
+    const vals = Object.values(q.sc);
+    const i = answers[qi];
+    const key = keys[Math.min(i, keys.length-1)];
+    if (scores[key] !== undefined) scores[key] += vals[Math.min(i, vals.length-1)];
+  });
+  currentType = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
+  renderResult();
+  showPage('result');
+}
+
+function renderResult() {
+  const t = TYPES[currentType];
+  document.getElementById('trust-count').textContent = t.trust;
+
+  const hero = document.getElementById('result-hero');
+  hero.style.background = `linear-gradient(160deg, ${t.bg} 0%, #fff 70%)`;
+  hero.innerHTML = `
+    <div class="result-animal" style="background:${t.bg};border-color:${t.color}40">${t.emoji}</div>
+    <div class="result-type-name" style="color:${t.textColor}">${t.name}</div>
+    <div class="result-type-pill" style="background:${t.bg};color:${t.color}">${t.pill}</div>
+    <div class="result-empathy">${t.empathy}</div>
+  `;
+
+  const cause = document.getElementById('result-cause');
+  cause.innerHTML = `<div class="result-cause-label">根本的な原因</div><div class="result-cause-text">${t.cause}</div>`;
+
+  const tl = document.getElementById('result-timeline');
+  tl.innerHTML = `<div class="timeline-title">続けるとどう変わる？</div>` +
+    TIMELINE.map((item, i) => `
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:${item.bg};color:${item.color}">${i+1}</div>
+          ${i < TIMELINE.length-1 ? '<div class="tl-line"></div>' : ''}
+        </div>
+        <div style="padding-bottom:14px">
+          <div class="tl-week" style="color:${item.color}">${item.week}</div>
+          <div class="tl-text">${item.text}</div>
+        </div>
+      </div>
+    `).join('');
+
+  const cta = document.getElementById('result-cta');
+  cta.innerHTML = `
+    <button class="btn-product" style="background:${t.color}" onclick="showProductPage()">あなたに合うサプリを見る →</button>
+    <div class="result-social">同じタイプの方が続々と改善中</div>
+  `;
+}
+
+// ===== PRODUCT =====
+function showProductPage() {
+  renderProduct();
+  showPage('product');
+}
+
+function renderProduct() {
+  const t = TYPES[currentType];
+  const prods = PRODUCTS[currentType] || {};
+  document.getElementById('product-header-title').textContent = 'おすすめサプリ';
+  document.getElementById('product-header-title').style.color = t.color;
+
+  const visiblePlans = planTab === 'teiki'
+    ? PLANS.filter(p => p.id !== 'ume')
+    : PLANS;
+
+  function planItems(planId) {
+    return (prods[planId] || []);
+  }
+  function planTotal(planId) {
+    return planItems(planId).reduce((s, p) => s + p.price, 0);
+  }
+
+  const body = document.getElementById('product-body');
+  body.innerHTML = `
+    <div class="product-type-banner" style="background:${t.bg}">
+      <div class="product-type-icon">${t.emoji}</div>
+      <div>
+        <div class="product-type-text">${t.name} におすすめ</div>
+        <div class="product-type-sub">Amazonで購入できます</div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:14px 16px;border:1px solid #eee">
+      <div style="font-size:13px;font-weight:700;color:${t.color};margin-bottom:6px">体の内側を整えるには、最低でも2〜3ヶ月かかります。</div>
+      <div style="font-size:13px;color:#555;line-height:1.65">1週間では変わりません。まずは1つから始めて、続けることが大切です。</div>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab-btn${planTab==='teiki'?' on':''}" id="tab-teiki" style="${planTab==='teiki'?'background:'+t.color:''}">セットで購入</button>
+      <button class="tab-btn${planTab==='tanpin'?' on':''}" id="tab-tanpin" style="${planTab==='tanpin'?'background:'+t.color:''}">1品から試す</button>
+    </div>
+
+    ${visiblePlans.map(p => {
+      const items = planItems(p.id);
+      const total = planTotal(p.id);
+      const isSel = selectedPlan === p.id;
+      return `
+      <div class="plan-card${isSel?' selected':''}" id="pc-${p.id}"
+           style="${isSel?'border-color:'+p.color+';background:'+p.bg:''}; margin-top:${p.badge?'18':'6'}px">
+        ${p.badge ? `<div class="plan-badge" style="background:${p.badgeColor}">${p.badge}</div>` : ''}
+        <div class="plan-top">
+          <div>
+            <div class="plan-name" style="color:${isSel?p.color:'#1a1a1a'}">${p.name}</div>
+            <div class="plan-role">${p.role}</div>
+          </div>
+          <div class="radio-circle" style="${isSel?'border-color:'+p.color:''}">
+            ${isSel ? `<div class="radio-dot" style="background:${p.color}"></div>` : ''}
+          </div>
+        </div>
+        <div class="plan-price-row">
+          <div class="plan-price" style="color:${p.color}">¥${total.toLocaleString()}</div>
+          <div class="plan-unit">円〜（合計）</div>
+        </div>
+        <div class="plan-items">
+          ${items.map(it=>`
+            <div class="plan-item">
+              <div class="item-dot" style="background:${p.color}"></div>
+              <a href="${it.url}" target="_blank" rel="noopener" style="color:${isSel?p.color:'#1a1a1a'};text-decoration:none;font-size:13px">
+                ${it.name} <span style="color:#888;font-size:11px">¥${it.price.toLocaleString()}</span>
+              </a>
+            </div>`).join('')}
+        </div>
+        ${isSel?`<div class="voice-box"><div class="voice-txt">「${p.voice}」</div><div class="voice-by">${p.voiceBy}</div></div>`:''}
+      </div>`;
+    }).join('')}
+
+    <div class="guarantee-row">
+      <div class="g-item">✓ Amazon公式</div>
+      <div class="g-item">✓ 翌日配送対応</div>
+      <div class="g-item">✓ 返品保証あり</div>
+    </div>
+  `;
+
+  document.getElementById('tab-teiki').onclick = () => { planTab='teiki'; if(selectedPlan==='ume') selectedPlan='take'; renderProduct(); };
+  document.getElementById('tab-tanpin').onclick = () => { planTab='tanpin'; selectedPlan='ume'; renderProduct(); };
+  PLANS.forEach(p => {
+    const el = document.getElementById('pc-'+p.id);
+    if (el) el.onclick = () => { selectedPlan = p.id; renderProduct(); };
+  });
+
+  const sp = PLANS.find(p => p.id === selectedPlan);
+  const items = planItems(selectedPlan);
+  const footer = document.getElementById('product-footer');
+
+  if (items.length === 1) {
+    footer.innerHTML = `
+      <a href="${items[0].url}" target="_blank" rel="noopener" style="display:block;text-decoration:none">
+        <button class="btn-buy" style="background:${sp.color};width:100%">Amazonで購入する →</button>
+      </a>
+      <button class="btn-sub-link" onclick="planTab='teiki';selectedPlan='take';renderProduct()">セットで購入する方がお得です →</button>
+    `;
+  } else {
+    footer.innerHTML = `
+      <div style="font-size:13px;font-weight:700;color:${sp.color};margin-bottom:12px;text-align:center">商品ごとにAmazonで購入できます</div>
+      ${items.map((it, idx) => `
+        <a href="${it.url}" target="_blank" rel="noopener" style="display:block;text-decoration:none;margin-bottom:10px">
+          <div style="width:100%;background:#fff;border:2px solid ${sp.color};border-radius:14px;padding:14px 16px;cursor:pointer;box-sizing:border-box">
+            <div style="font-size:11px;color:#aaa;margin-bottom:4px">商品 ${idx+1}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+              <div style="font-size:13px;font-weight:700;color:${sp.color};line-height:1.4;flex:1">${it.name.length > 22 ? it.name.slice(0,22)+'...' : it.name}</div>
+              <div style="font-size:14px;font-weight:700;color:${sp.color};white-space:nowrap">¥${it.price.toLocaleString()} →</div>
+            </div>
+          </div>
+        </a>`).join('')}
+      <button class="btn-sub-link" onclick="${planTab==='teiki'?`planTab='tanpin';selectedPlan='ume';renderProduct()`:`planTab='teiki';selectedPlan='take';renderProduct()`}">
+        ${planTab==='teiki'?'1品だけ試す':'セットで購入する →'}
+      </button>
+    `;
+  }
+}
+</script>
+</body>
+</html>
